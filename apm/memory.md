@@ -21,7 +21,6 @@ Fragment的销毁判定规则为，mFragmentManager为空且mCalled为true，mCa
 #### 2.1.4.3. fd OOM：打开的文件数过多：读取/proc/self/fd
 #### 2.1.4.4. FastHugeMemoryOOMTracker：内存暴涨过快，比如打开了一张大图  
 #### 2.1.4.5. native heap OOM：判断Debug.getNativeHeapAllocatedSize()占比总的内存值
-#### 2.1.4.6. mem asan ?
 ## 2.2. Native内存监控
 ### 2.2.1. [libmemunreachable](https://android.googlesource.com/platform/system/memory/libmemunreachable/+/master/README.md)
 KOOM使用的是这个
