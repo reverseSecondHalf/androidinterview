@@ -97,7 +97,10 @@ systrace 利用了 Linux 的ftrace调试工具（ftrace是用于了解Linux内�
 2、它能够直观地反映CPU的利用率。
 3、右侧的Alerts能够根据我们应用的问题给出具体的建议，比如说，它会告诉我们App界面的绘制比较慢或者GC比较频繁。
 
-## 2.3. [Simpleperf](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md)
+## 2.3. [perfetto](https://perfetto.dev/docs/)
+google官方工具，可以认为是systrace的升级版。可参见：https://juejin.cn/post/6974377095359266847
+
+## 2.4. [Simpleperf](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md)
 
 Android Studio includes a graphical front end to Simpleperf, documented in Inspect CPU activity with CPU Profiler. Most users will prefer to use that instead of using Simpleperf directly.
 
@@ -105,7 +108,7 @@ Simpleperf is a native CPU profiling tool for Android. It can be used to profile
 
 Android 5.0 新增了Simpleperf性能分析工具，它利用 CPU 的性能监控单元（PMU）提供的硬件 perf 事件。使用 Simpleperf 可以看到所有的 Native 代码的耗时，有时候一些 Android 系统库的调用对分析问题有比较大的帮助，例如加载 dex、verify class 的耗时等。Simpleperf 同时封装了 systrace 的监控功能，通过 Android 几个版本的优化，现在 Simpleperf 比较友好地支持 Java 代码的性能分析。具体来说分几个阶段：第一个阶段：在 Android M 和以前，Simpleperf 不支持 Java 代码分析。第二个阶段：在 Android O 和以前，需要手动指定编译 OAT 文件。第三个阶段：在 Android P 和以后，无需做任何事情，Simpleperf 就可以支持 Java 代码分析。从这个过程可以看到 Google 还是比较看重这个功能，在 Android Studio 3.2 也在 Profiler 中直接支持 Simpleperf。
 
-## 2.4. Nanoscope
+## 2.5. Nanoscope
 Uber的，有性能损耗的instrument 工具，需要自己刷ROM。
 
 # 3. 冻帧率
@@ -114,3 +117,6 @@ Choreographer的doFrame根据时间以及实际计算的frameCount判断是否�
 
 # 4. FPS
 原理同冻帧率。
+
+# 5. 设备分级
+根据设备硬件属性将设备分级，不同级别策略不同，比如低端机有些动画就不做了、gif就不播了。

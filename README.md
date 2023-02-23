@@ -19,6 +19,7 @@
 待看360的源码实现：https://github.com/Qihoo360/ArgusAPM/tree/75ead19ca98a8a1f776688e9df5b572f20c80b12/argus-apm/argus-apm-main/src/main/java/com/argusapm/android/core/job/anr
 ## 11.5. 网络性能  
 ## 11.6. 耗电
+可参见：https://juejin.cn/post/7165802603870158855
 ## 11.7. [图片](https://github.com/reverseSecondHalf/androidinterview/blob/main/picture/pic.md)
 ## 11.8. [冷启动耗时](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/coldstart.md)
 ## 11.9. 日志系统  
