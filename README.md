@@ -12,21 +12,19 @@
 # 11. APM
 待参考：https://juejin.cn/post/6844904105438134286
 
-## 11.1. 网络性能  
-## 11.2. [Crash](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/crash.md)
-## 11.3. [内存](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/memory.md)
-## 11.4. [卡顿监测](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/block.md)  
-## 11.5. ANR
+## 11.1. [Crash](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/crash.md)
+## 11.2. [内存](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/memory.md)(含文件、线程)
+## 11.3. [卡顿监测](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/block.md)  
+## 11.4. ANR
 待看360的源码实现：https://github.com/Qihoo360/ArgusAPM/tree/75ead19ca98a8a1f776688e9df5b572f20c80b12/argus-apm/argus-apm-main/src/main/java/com/argusapm/android/core/job/anr
-## 11.6. 文件监控（fd过多，大的sp文件等、临时文件或者过大的文件）
-## 11.7. 线程监控
-## 11.8. 耗电
-## 11.9. [图片](https://github.com/reverseSecondHalf/androidinterview/blob/main/picture/pic.md)
-## 11.10. [冷启动耗时](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/coldstart.md)
-## 11.11. 日志系统  
+## 11.5. 网络性能  
+## 11.6. 耗电
+## 11.7. [图片](https://github.com/reverseSecondHalf/androidinterview/blob/main/picture/pic.md)
+## 11.8. [冷启动耗时](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/coldstart.md)
+## 11.9. 日志系统  
 参考：https://juejin.cn/post/6844903942918832142
 https://juejin.cn/post/7074762489736478757
-## 11.12. 进程监控
+## 11.10. 进程监控  
 针对多进程应用，统计进程启动情况，发现启动异常（耗电、存活率等）
 # 12. 插件化  
 # 13. 虚拟机  
