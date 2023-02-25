@@ -16,7 +16,7 @@ https://www.jianshu.com/p/33d786d981b5
 Fragment的销毁判定规则为，mFragmentManager为空且mCalled为true，mCalled为true表示此fragment已经经历了一些生命周期
 ### 2.1.3. 大内存对象的监测，比如：大Bitmap、大的原始类型数组、大的Object数组等
 ### 2.1.4. OOM监控
-注：关于OOM的治理可参见[Crash](https://github.com/reverseSecondHalf/androidinterview/blob/main/apm/crash.md)
+注：关于OOM的治理可参见[Crash](../apm/crash.md)
 #### 2.1.4.1. heap OOM：连续几次发现堆内存都到达了指定的阈值
 #### 2.1.4.2. thread OOM：打开的线程数过多：读取/proc/self/task
 #### 2.1.4.3. fd OOM：打开的文件数过多：读取/proc/self/fd
