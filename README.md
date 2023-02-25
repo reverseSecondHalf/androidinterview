@@ -33,6 +33,6 @@ https://juejin.cn/post/7074762489736478757
 # 15. Kotlin  
 # 16. 协程  
 # 17. Webview（优化、jsbridge）
-# 18. 合规
+# 18. [合规](all/privacy.md)
 # 19. PUSH（厂商push、保活？）
 # 20. 遍历下项目里的gradle查缺补漏
