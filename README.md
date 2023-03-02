@@ -1,11 +1,11 @@
-# 1. JAVA
+# 1. [JAVA]()
 # 2. Kotlin
 # 3. 网络
 # 4. [图片](picture/pic.md)
 # 5. 数据存储
 # 6. 渲染
 待看：[Choreographer 解析](https://www.jianshu.com/p/dd32ec35db1d)
-# 7. 通信
+# 7. [通信](all/talk.md)
 # 8. 架构
 # 9. 编译
 # 10. 内存
