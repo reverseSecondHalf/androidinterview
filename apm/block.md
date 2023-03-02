@@ -119,4 +119,9 @@ Choreographer的doFrame根据时间以及实际计算的frameCount判断是否�
 原理同冻帧率。
 
 # 5. 设备分级
-根据设备硬件属性将设备分级，不同级别策略不同，比如低端机有些动画就不做了、gif就不播了。
+根据设备硬件属性将设备分级，不同级别策略不同，比如低端机上：
+1. 禁止viewpager预加载
+2. 图片内存占用(低端机使用rgb565，高端机ARGB888)
+3. 禁止滚动时加载图片（com.facebook.imagepipeline.producers.ThreadHandoffProducerQueue#stopQueuing）
+4. 禁止一些动画播放
+5. 禁止一些feed的gif自动播放
