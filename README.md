@@ -7,7 +7,7 @@
 待看：[Choreographer 解析](https://www.jianshu.com/p/dd32ec35db1d)
 # 7. [通信](all/talk.md)
 # 8. 架构
-# 9. 编译
+# 9. [编译](all/compile.md)
 # 10. 内存
 # 11. 热修复  
 # 12. [减包](all/shrink.md)
@@ -30,7 +30,7 @@ https://juejin.cn/post/7074762489736478757
 ## 13.10. 进程监控  
 针对多进程应用，统计进程启动情况，发现启动异常（耗电、存活率等）
 # 14. 插件化  
-# 15. 虚拟机  
+# 15. [虚拟机](all/dalvik.md) 
 # 16. AOP、字节码插桩
 # 17. Kotlin  
 # 18. 协程  

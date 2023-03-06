@@ -2,3 +2,4 @@
 # 子线程是否可以更新UI
 activity的onResume之前可以
 # 点击icon到activity显示发生了哪些
+# 动画原理
