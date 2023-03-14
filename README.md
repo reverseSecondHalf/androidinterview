@@ -3,7 +3,7 @@
 # 3. 网络
 # 4. [图片](picture/pic.md)
 # 5. 数据存储
-# 6. 渲染
+# 6. [渲染](render/render.md)
 待看：[Choreographer 解析](https://www.jianshu.com/p/dd32ec35db1d)
 # 7. [通信](all/talk.md)
 # 8. [架构](all/architecture.md)
@@ -38,3 +38,4 @@ https://juejin.cn/post/7074762489736478757
 # 20. [合规](all/privacy.md)
 # 21. PUSH（厂商push、保活？）
 # 22. 遍历下项目里的gradle查缺补漏
+# 23. [Framework](all/framework.md)
