@@ -6,7 +6,7 @@
 # 6. 渲染
 待看：[Choreographer 解析](https://www.jianshu.com/p/dd32ec35db1d)
 # 7. [通信](all/talk.md)
-# 8. 架构
+# 8. [架构](all/architecture.md)
 # 9. [编译](all/compile.md)
 # 10. 内存
 # 11. 热修复  
