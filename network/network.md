@@ -19,6 +19,8 @@ https://xiaozhuanlan.com/topic/3758142906
 https://www.cnblogs.com/shangyueyue/p/11041998.html
 https://dazzey.cn/2022/05/13/HTTP1-1-、2-、3版本中的队头阻塞/
 
+https://zhuanlan.zhihu.com/p/488681676
+
 图中第一种请求方式，就是单次发送request请求，收到response后再进行下一次请求，显示是很低效的。
 
 于是http1.1提出了管线化(pipelining)技术，就是如图中第二中请求方式，一次性发送多个request请求。

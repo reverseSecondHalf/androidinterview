@@ -37,6 +37,21 @@ Handler接受到AMS发来的EXECUTE_TRANSACTION消息后，将调用TransactionE
 frameworks/base/core/java/android/app/servertransaction/TransactionExecutor.java
 
 反正接下来就会走onStart和onResume。细节不表了。
+
+## 另外一个简述的版本
+1、Launcher被调用点击事件，转到Instrumentation类的startActivity方法。
+2、Instrumentation通过AIDL方式使用Binder机制告诉ATMS要启动应用的需求。
+3、ATMS收到需求后，反馈Launcher，让Launcher进入Paused状态
+4、Launcher进入Paused状态，ATMS将创建进程的任务交给AMS，AMS通过socket与Zygote通信，告知Zygote需要新建进程。
+5、Zygote fork进程，并调用ActivityThread的main方法，也就是app的入口。
+6、ActivityThread的main方法新建了ActivityThread实例，并新建了Looper实例，开始loop循环。
+同时ActivityThread也告知AMS，进程创建完毕，开始创建Application，Provider，并调用Applicaiton的attach，onCreate方法。
+7、最后就是创建上下文，通过类加载器加载Activity，调用Activity的onCreate方法。
+
+作者：Coolbreeze
+链接：https://juejin.cn/post/7017798180347576350
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 # 2. 几个进程的介绍
 init进程：init是所有linux程序的起点，是Zygote的父进程。解析init.rc孵化出Zygote进程。
 

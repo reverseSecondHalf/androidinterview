@@ -29,7 +29,7 @@
 https://juejin.cn/post/7074762489736478757
 ## 13.10. 进程监控  
 针对多进程应用，统计进程启动情况，发现启动异常（耗电、存活率等）
-# 14. 插件化  
+# 14. [插件化](all/plugin.md)
 # 15. [虚拟机](all/dalvik.md) 
 # 16. AOP、字节码插桩
 # 17. Kotlin  
@@ -39,3 +39,4 @@ https://juejin.cn/post/7074762489736478757
 # 21. PUSH（厂商push、保活？）
 # 22. 遍历下项目里的gradle查缺补漏
 # 23. [Framework](all/framework.md)
+# 24. [Android其它](all/other)

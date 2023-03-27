@@ -125,3 +125,6 @@ Choreographer的doFrame根据时间以及实际计算的frameCount判断是否�
 3. 禁止滚动时加载图片（com.facebook.imagepipeline.producers.ThreadHandoffProducerQueue#stopQueuing）
 4. 禁止一些动画播放
 5. 禁止一些feed的gif自动播放
+
+# ANR监测
+https://juejin.cn/post/7114181318644072479
