@@ -77,3 +77,64 @@ executor.allowCoreThreadTimeOut(true)
 参考：
 https://juejin.cn/post/7044165242565165086#heading-5
 https://juejin.cn/post/6948397601515372557#heading-3
+
+# crash监控原理
+可以参考：https://www.dalvik.work/2021/06/22/xcrash/
+## java crash监控原理
+1. 通过实现UncaughtExceptionHandler将其通过方法设置Thread.setDefaultUncaughtExceptionHandler，同时保存已有的，这样发生时可以逐个回调。
+2. 发生crash时会触发uncaughtException，在这里进行异常处理，比如通过参数throwable打印崩溃的堆栈，比如dump下当前所有的fd（/proc/self/fd），
+   比如通过 Thread.getAllStackTraces获取其它线程的堆栈。
+## native crash监控原理
+（以下是xcrash的流程，具体可参考https://www.dalvik.work/2021/06/22/xcrash/#sigaction）
+1. 通过系统的sigaction方法，给相关信号（比如SIGABRT、SIGBUS、SIGFPE、SIGILL、SIGSEGV、SIGTRAP、SIGSYS、SIGSTKFLT）
+发生时指定一个处理函数。
+2. fork出子进程 dumper，子进程继承了父进程的内存布局，也就捕获到了APP进程crash时刻的内存布局
+3. 通过 waitpid 阻塞直到 dumper 进程完成工作。
+4. dumper 将 signal 和调用堆栈等信息写入管道，然后加载程序 libxcrash_dumper.so 替换当前的内存空间（旧的内存空间的所有信息将被清空）
+5. xcd_core.c 里的 main 函数从管道里读取 xc_crash_spot 并写入 tombstone 日志文件，退出
+6. signal handler 线程从阻塞中恢复，退出 APP 进程
+
+## 堆栈获取
+native crash时我们也可能想获取java堆栈，所以这里把堆栈获取单独拎出来说。
+根据[开发高手课](https://time.geekbang.org/column/article/70966)
+### Java堆栈
+ 获取Java 堆栈
+   native崩溃时，通过unwind只能拿到Native堆栈。我们希望可以拿到当时各个线程的Java堆栈
+   1. Thread.getAllStackTraces()。
+    优点：简单，兼容性好。
+    缺点：
+        a. 成功率不高，依靠系统接口在极端情况也会失败。
+        b. 7.0之后这个接口是没有主线程堆栈。
+        c. 使用Java层的接口需要暂停线程
+   2. hook libart.so。通过hook ThreadList和Thread的函数，获得跟ANR一样的堆栈。为了稳定性，我们会在fork子进程执行。
+   优点：信息很全，基本跟ANR的日志一样，有native线程状态，锁信息等等。
+   缺点：黑科技的兼容性问题，失败时可以用Thread.getAllStackTraces()兜底
+获取Java堆栈的方法还可以用在卡顿时，因为使用fork进程，所以可以做到完全不卡主进程。
+### Native堆栈
+通过 ptrace 可以拿到 PC 寄存器的值，它指向正在执行的代码的地址；拿 pc 去 /proc/pid/maps 里找，看 pc 落在哪块 mmap 上，从而得知这段代码在哪个 so 文件里；so 文件是 ELF 结构，解析出它里面的符号表及其偏移，pc - mmap.start 就是这段代码在这块 mmap 上的偏移，再加上 mmap.offset 内存映射的偏移就是这段代码在 so 文件里的偏移，从而得知这段代码在哪个符号/函数里（函数名）
+
+但是怎么从 pc 回溯整个函数调用栈我还没有想明白
+
+# ANR监控
+参考：https://juejin.cn/post/7114181318644072479
+# 5.0以下
+监控/data/anr/traces.txt
+# 5.0及以上
+1. 通过sigaction监听SIGQUIT信号，但是默认情况下因为这个信号被SignalCatcher接管了，所以需要注意下先调用pthread_sigmask(SIG_UNBLOCK)。
+2. 值得注意的是，SIGQUIT触发也不一定由anr发生，这是一个必要但不充分的条件，所以我们还要添加其他的判断。
+（1） 首先检查主线程是否阻塞，如果阻塞则一定发生了ANR。
+   MessageQueue 是个单向链表，按 Message.when 自然序排
+   表头是 MessageQueue.mMessages
+   如果主线程阻塞了，那么表头一定是超时的（when - SystemClock.uptimeMillis() 为负），当超时时间大于阈值时（前台 2s，后台 10s，这个阈值是怎么来的呢？）就可以认定是发生阻塞了
+
+（2） 20s内每隔 500ms 轮询是否处于 NOT_RESPONDING 状态（SignalAnrTracer.checkErrorState）
+通过遍历ActivityManager的getProcessesInErrorState函数，根据如下条件判断：
+errorStateInfo.pid == pid && errorStateInfo.condition == ActivityManager.ProcessErrorStateInfo.NOT_RESPONDING
+是的话则是anr了。
+3. dump日志
+   Matrix 也与 xCrash 有着不同的实现方式，Matrix 并没有自己去 dump anr 日志，而是通过 hook 系统调用后重新发送 SIGQUIT 给 Signal Catcher 线程，让它去执行系统的 ANR 处理流程，从而自己也能拿到一份 ANR 日志，避免了重复 dump anr
+
+hook 用的是 xHook
+
+Signal Catcher 线程 ID 则是遍历 /proc/[pid]/task/[tid]/comm 对比线程名，以及对比 /proc/[tid]/status 里的 magic code 来确定的
+参考：https://www.dalvik.work/2021/12/03/matrix-anr/
