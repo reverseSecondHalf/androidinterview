@@ -1,4 +1,4 @@
-# 1. [JAVA]()
+# 1. [JAVA](all/java.md)
 # 2. Kotlin
 # 3. 网络
 # 4. [图片](picture/pic.md)
@@ -39,4 +39,6 @@ https://juejin.cn/post/7074762489736478757
 # 21. PUSH（厂商push、保活？）
 # 22. 遍历下项目里的gradle查缺补漏
 # 23. [Framework](all/framework.md)
-# 24. [Android其它](all/other)
+# 24. [Android其它](all/other.md)
+# 25. [native](all/native.md)
+# 26. [c++](all/c%2B%2B.md)

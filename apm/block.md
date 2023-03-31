@@ -128,3 +128,8 @@ Choreographer的doFrame根据时间以及实际计算的frameCount判断是否�
 
 # ANR监测
 https://juejin.cn/post/7114181318644072479
+
+
+
+
+卡顿待进一步梳理，可参考：https://juejin.cn/post/7214635327407308859#heading-13
